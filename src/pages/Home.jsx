@@ -1,0 +1,348 @@
+import React from 'react';
+import { Link } from 'react-router-dom';
+import { motion } from 'framer-motion';
+import { FaSprayCan, FaHome, FaBath, FaCheckCircle, FaArrowRight, FaPhone, FaStar, FaShoppingCart } from 'react-icons/fa';
+import { MdCleaningServices, MdKitchen } from 'react-icons/md';
+
+// Import product images
+import redCleaner from '../assets/red-cleaner.jpg';
+import blueCleaner from '../assets/blue-cleaner.jpg';
+import comboPack from '../assets/combo-pack.png';
+import productBottles from '../assets/product-bottles.jpg';
+
+const Home = () => {
+    const services = [
+        {
+            icon: <MdKitchen className="text-4xl" />,
+            title: 'Kitchen Tiles Cleaning',
+            description: 'Deep cleaning for kitchen tiles, removing grease, stains, and grime for a sparkling finish.',
+            color: 'from-orange-400 to-red-500',
+        },
+        {
+            icon: <FaHome className="text-4xl" />,
+            title: 'Floor Cleaning',
+            description: 'Professional floor cleaning for all surfaces - marble, tiles, wood, and more.',
+            color: 'from-blue-400 to-indigo-500',
+        },
+        {
+            icon: <FaBath className="text-4xl" />,
+            title: 'Bathroom Cleaning',
+            description: 'Complete bathroom sanitization and deep cleaning for a hygienic space.',
+            color: 'from-cyan-400 to-teal-500',
+        },
+    ];
+
+    const products = [
+        {
+            name: 'YahYah Sparkle Red',
+            subtitle: 'Advanced Multi Cleaner for Deep Clean',
+            price: '₹350',
+            unit: '1 Litre',
+            image: redCleaner,
+            color: 'from-red-500 to-orange-500',
+            bgColor: 'from-red-50 to-orange-50',
+        },
+        {
+            name: 'YahYah Sparkle Blue',
+            subtitle: 'Advanced Salt Cleaner for Stubborn Stains',
+            price: '₹250',
+            unit: '1 Litre',
+            image: blueCleaner,
+            color: 'from-blue-500 to-cyan-500',
+            bgColor: 'from-blue-50 to-cyan-50',
+        },
+        {
+            name: 'Combo Pack - Best Value!',
+            subtitle: 'Complete Cleaning Kit with Red & Blue Cleaners + Accessories',
+            price: '₹1500',
+            unit: '6 Litres',
+            image: comboPack,
+            color: 'from-purple-500 to-pink-500',
+            bgColor: 'from-purple-50 to-pink-50',
+            isBestValue: true,
+        },
+    ];
+
+    const whyChooseUs = [
+        'Professional & Trained Staff',
+        'Eco-Friendly Cleaning Products',
+        'Affordable Pricing',
+        '100% Satisfaction Guarantee',
+        'On-Time Service',
+        'All Over Hyderabad Coverage',
+    ];
+
+    const whatsappNumber = '917671842007';
+    const whatsappMessage = encodeURIComponent('Hi! I am interested in YahYah Sparkle cleaning products. Please share more details.');
+    const whatsappLink = `https://wa.me/${whatsappNumber}?text=${whatsappMessage}`;
+
+    return (
+        <div className="overflow-hidden">
+            {/* Hero Section */}
+            <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
+                {/* Animated Gradient Background */}
+                <div className="absolute inset-0 gradient-bg-animated" />
+
+                {/* Decorative Elements */}
+                <div className="absolute top-20 left-10 w-72 h-72 bg-white/10 rounded-full blur-3xl animate-pulse-slow" />
+                <div className="absolute bottom-20 right-10 w-96 h-96 bg-accent-500/20 rounded-full blur-3xl animate-pulse-slow" />
+                <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-secondary-500/10 rounded-full blur-3xl" />
+
+                <div className="relative container-custom py-20">
+                    <div className="grid lg:grid-cols-2 gap-12 items-center">
+                        {/* Left Side - Text Content */}
+                        <motion.div
+                            initial={{ opacity: 0, x: -30 }}
+                            animate={{ opacity: 1, x: 0 }}
+                            transition={{ duration: 0.8 }}
+                            className="text-center lg:text-left"
+                        >
+                            {/* Badge */}
+                            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/10 backdrop-blur-sm border border-white/20 mb-8">
+                                <FaSprayCan className="text-accent-400" />
+                                <span className="text-white/90 text-sm font-medium">YahYah Sparkle Cleaning Products</span>
+                            </div>
+
+                            {/* Main Heading */}
+                            <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold text-white mb-6 leading-tight text-shadow-lg">
+                                Bring <span className="text-accent-400">Sparkle</span>
+                                <br />To Your Home
+                            </h1>
+
+                            <p className="text-lg md:text-xl text-white/80 max-w-2xl mb-10 leading-relaxed">
+                                Transform your living space with our professional cleaning products.
+                                We deliver spotless results that exceed expectations, all over Hyderabad.
+                            </p>
+
+                            {/* CTA Buttons */}
+                            <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start items-center">
+                                <a href={whatsappLink} target="_blank" rel="noopener noreferrer" className="btn-primary px-8 py-4 text-lg">
+                                    Book Now <FaArrowRight className="ml-2" />
+                                </a>
+                                <a href="tel:+917671842007" className="btn-secondary px-8 py-4 text-lg">
+                                    <FaPhone className="mr-2" /> Call: 7671842007
+                                </a>
+                            </div>
+                        </motion.div>
+
+                        {/* Right Side - Product Image */}
+                        <motion.div
+                            initial={{ opacity: 0, x: 30 }}
+                            animate={{ opacity: 1, x: 0 }}
+                            transition={{ duration: 0.8, delay: 0.2 }}
+                            className="relative"
+                        >
+                            <div className="relative">
+                                <div className="absolute inset-0 bg-gradient-to-br from-accent-400/30 to-primary-500/30 rounded-3xl blur-2xl"></div>
+                                <img
+                                    src={productBottles}
+                                    alt="YahYah Sparkle Cleaning Products"
+                                    className="relative w-full h-auto rounded-3xl shadow-2xl border-4 border-white/20"
+                                />
+                                <div className="absolute -bottom-4 left-1/2 transform -translate-x-1/2 bg-white/95 text-gray-800 px-6 py-3 rounded-full shadow-lg font-bold text-sm">
+                                    ✨ Premium Cleaning Solutions
+                                </div>
+                            </div>
+                        </motion.div>
+                    </div>
+
+                    {/* Scroll Indicator */}
+                    <motion.div
+                        className="absolute bottom-10 left-1/2 transform -translate-x-1/2"
+                        animate={{ y: [0, 10, 0] }}
+                        transition={{ repeat: Infinity, duration: 2 }}
+                    >
+                        <div className="w-6 h-10 rounded-full border-2 border-white/50 flex items-start justify-center p-2">
+                            <div className="w-1.5 h-3 bg-white/70 rounded-full" />
+                        </div>
+                    </motion.div>
+                </div>
+            </section>
+
+            {/* Products Section */}
+            <section className="section-padding bg-white">
+                <div className="container-custom">
+                    <div className="text-center mb-12">
+                        <span className="inline-block px-4 py-2 rounded-full bg-accent-100 text-accent-700 font-semibold text-sm mb-4">
+                            Our Products
+                        </span>
+                        <h2 className="text-3xl md:text-5xl font-bold text-gray-900 mb-4">
+                            Premium <span className="gradient-text">Cleaning Liquids</span>
+                        </h2>
+                        <p className="text-gray-600 max-w-2xl mx-auto text-lg">
+                            Professional-grade cleaning solutions for every need
+                        </p>
+                    </div>
+
+                    <div className="grid md:grid-cols-3 gap-8">
+                        {products.map((product, index) => (
+                            <motion.div
+                                key={index}
+                                initial={{ opacity: 0, y: 30 }}
+                                whileInView={{ opacity: 1, y: 0 }}
+                                transition={{ delay: index * 0.15 }}
+                                className="group"
+                            >
+                                <div className={`bg-gradient-to-br ${product.bgColor} rounded-3xl p-6 h-full hover:shadow-2xl transition-all duration-300 relative`}>
+                                    {/* Best Value Badge */}
+                                    {product.isBestValue && (
+                                        <div className="absolute -top-3 left-1/2 transform -translate-x-1/2 bg-gradient-to-r from-yellow-400 to-orange-500 text-white px-4 py-1 rounded-full text-sm font-bold shadow-lg z-10">
+                                            🔥 Best Value!
+                                        </div>
+                                    )}
+
+                                    {/* Product Image */}
+                                    <div className="relative mb-6 overflow-hidden rounded-2xl">
+                                        <img
+                                            src={product.image}
+                                            alt={product.name}
+                                            className="w-full h-64 object-cover group-hover:scale-105 transition-transform duration-300"
+                                        />
+                                    </div>
+
+                                    {/* Product Info */}
+                                    <div className="text-center">
+                                        <h3 className="text-lg font-bold text-gray-900 mb-2">{product.name}</h3>
+                                        <p className="text-gray-600 text-sm mb-4">{product.subtitle}</p>
+
+                                        {/* Price */}
+                                        <div className={`inline-block px-6 py-3 rounded-xl bg-gradient-to-r ${product.color} mb-4`}>
+                                            <span className="text-white text-2xl font-bold">{product.price}</span>
+                                            <span className="text-white/80 text-sm ml-2">/ {product.unit}</span>
+                                        </div>
+
+                                        {/* Order Button */}
+                                        <a
+                                            href={`https://wa.me/${whatsappNumber}?text=${encodeURIComponent(`Hi! I want to order ${product.name} (${product.price} / ${product.unit}). Please confirm availability.`)}`}
+                                            target="_blank"
+                                            rel="noopener noreferrer"
+                                            className={`inline-flex items-center justify-center w-full px-6 py-3 bg-gradient-to-r ${product.color} text-white font-bold rounded-full hover:shadow-lg transition-all duration-300 transform hover:scale-105`}
+                                        >
+                                            <FaShoppingCart className="mr-2" /> Order Now
+                                        </a>
+                                    </div>
+                                </div>
+                            </motion.div>
+                        ))}
+                    </div>
+                </div>
+            </section>
+
+            {/* Services Section */}
+            <section className="section-padding bg-gray-50">
+                <div className="container-custom">
+                    <div className="text-center mb-16">
+                        <span className="inline-block px-4 py-2 rounded-full bg-primary-100 text-primary-700 font-semibold text-sm mb-4">
+                            Our Services
+                        </span>
+                        <h2 className="text-3xl md:text-5xl font-bold text-gray-900 mb-4">
+                            What We <span className="gradient-text">Offer</span>
+                        </h2>
+                        <p className="text-gray-600 max-w-2xl mx-auto text-lg">
+                            Professional cleaning solutions tailored to your needs
+                        </p>
+                    </div>
+
+                    <div className="grid md:grid-cols-3 gap-8">
+                        {services.map((service, index) => (
+                            <motion.div
+                                key={index}
+                                initial={{ opacity: 0, y: 30 }}
+                                whileInView={{ opacity: 1, y: 0 }}
+                                transition={{ delay: index * 0.15 }}
+                                className="group"
+                            >
+                                <div className="card p-8 h-full hover:shadow-2xl transition-all duration-300">
+                                    <div className={`w-16 h-16 rounded-2xl bg-gradient-to-br ${service.color} flex items-center justify-center text-white mb-6 group-hover:scale-110 transition-transform duration-300`}>
+                                        {service.icon}
+                                    </div>
+                                    <h3 className="text-xl font-bold text-gray-900 mb-3">{service.title}</h3>
+                                    <p className="text-gray-600 leading-relaxed mb-4">{service.description}</p>
+                                    <Link to="/services" className="inline-flex items-center text-primary-600 font-semibold hover:text-primary-700 transition-colors">
+                                        Learn More <FaArrowRight className="ml-2 text-sm" />
+                                    </Link>
+                                </div>
+                            </motion.div>
+                        ))}
+                    </div>
+                </div>
+            </section>
+
+            {/* Why Choose Us Section */}
+            <section className="section-padding relative overflow-hidden">
+                <div className="absolute inset-0 gradient-bg opacity-95" />
+                <div className="absolute top-0 right-0 w-96 h-96 bg-white/5 rounded-full blur-3xl" />
+                <div className="absolute bottom-0 left-0 w-96 h-96 bg-accent-500/10 rounded-full blur-3xl" />
+
+                <div className="relative container-custom">
+                    <div className="grid lg:grid-cols-2 gap-16 items-center">
+                        <div>
+                            <span className="inline-block px-4 py-2 rounded-full bg-white/10 text-white font-semibold text-sm mb-4">
+                                Why Choose Us
+                            </span>
+                            <h2 className="text-3xl md:text-5xl font-bold text-white mb-6 leading-tight">
+                                The Best Cleaning Service in Hyderabad
+                            </h2>
+                            <p className="text-white/80 text-lg mb-8 leading-relaxed">
+                                With years of experience and a commitment to excellence, we deliver cleaning services
+                                that transform your space into a spotless sanctuary.
+                            </p>
+                            <div className="grid sm:grid-cols-2 gap-4">
+                                {whyChooseUs.map((item, index) => (
+                                    <motion.div
+                                        key={index}
+                                        initial={{ opacity: 0, x: -20 }}
+                                        whileInView={{ opacity: 1, x: 0 }}
+                                        transition={{ delay: index * 0.1 }}
+                                        className="flex items-center gap-3"
+                                    >
+                                        <FaCheckCircle className="text-accent-400 text-xl flex-shrink-0" />
+                                        <span className="text-white font-medium">{item}</span>
+                                    </motion.div>
+                                ))}
+                            </div>
+                        </div>
+
+                        <div className="relative">
+                            <div className="glass-card p-8 text-center">
+                                <FaSprayCan className="text-6xl text-accent-400 mx-auto mb-6" />
+                                <h3 className="text-2xl font-bold text-white mb-4">Get a Free Quote</h3>
+                                <p className="text-white/70 mb-6">Contact us today for a personalized cleaning solution</p>
+                                <Link to="/contact" className="btn-accent w-full">
+                                    Contact Us Now
+                                </Link>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            {/* CTA Section */}
+            <section className="section-padding bg-white">
+                <div className="container-custom">
+                    <div className="bg-gradient-to-r from-primary-600 via-secondary-600 to-accent-500 rounded-3xl p-8 md:p-16 text-center relative overflow-hidden">
+                        <div className="absolute inset-0 bg-black/10" />
+                        <div className="relative">
+                            <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">
+                                Ready to Experience the Sparkle?
+                            </h2>
+                            <p className="text-white/90 text-lg mb-8 max-w-2xl mx-auto">
+                                Book your cleaning service today and transform your home into a spotless haven.
+                            </p>
+                            <div className="flex flex-col sm:flex-row gap-4 justify-center">
+                                <Link to="/contact" className="inline-flex items-center justify-center px-8 py-4 bg-white text-primary-700 font-bold rounded-full hover:bg-gray-100 transition-all duration-300 transform hover:scale-105">
+                                    Book Now
+                                </Link>
+                                <a href="tel:+917671842007" className="inline-flex items-center justify-center px-8 py-4 border-2 border-white text-white font-bold rounded-full hover:bg-white hover:text-primary-700 transition-all duration-300">
+                                    <FaPhone className="mr-2" /> Call Now
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+    );
+};
+
+export default Home;
