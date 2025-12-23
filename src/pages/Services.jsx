@@ -11,23 +11,27 @@ import cleaningProducts from '../assets/cleaning-products.jpg';
 import redCleaner from '../assets/red-cleaner.jpg';
 import blueCleaner from '../assets/blue-cleaner.jpg';
 
+// Import product data and components
+import { products } from '../data/products';
+import ProductDetailsModal from '../components/ProductDetailsModal';
+
 const Services = () => {
     const services = [
         {
-            icon: <MdKitchen className="text-5xl" />,
-            title: 'Kitchen Tiles Cleaning',
-            description: 'Our specialized kitchen cleaning service removes stubborn grease, oil stains, and grime from your kitchen tiles. We use our Advanced Red Multi Cleaner for deep cleaning to restore the original shine.',
+            icon: <FaBath className="text-5xl" />,
+            title: 'Bathroom Specialist Cleaning',
+            description: 'Advanced multipurpose cleaning liquid specially formulated for deep bathroom cleaning. Effectively removes stains from old buckets, taps, white marble, bathroom doors, and mirrors. Also suitable for water tank cleaning.',
             features: [
-                'Deep grease & oil removal',
-                'Tile grout cleaning',
-                'Stain treatment',
-                'Sanitization included',
-                'Eco-friendly products',
+                'Old Bucket & Tap cleaning',
+                'White Marble restoration',
+                'Bathroom Door & Mirror clean',
+                'Water Tank cleaning',
+                'Multipurpose application',
             ],
-            color: 'from-orange-400 to-red-500',
-            bgColor: 'from-orange-50 to-red-50',
-            image: redCleaner,
-            productNote: 'YahYah Sparkle Red - Advanced Multi Cleaner for Deep Clean',
+            color: 'from-blue-400 to-indigo-500',
+            bgColor: 'from-blue-50 to-indigo-50',
+            image: blueCleaner,
+            productNote: 'YahYah Sparkle - The Multipurpose Specialist',
         },
         {
             icon: <FaHome className="text-5xl" />,
@@ -46,22 +50,6 @@ const Services = () => {
             productNote: 'YahYah Sparkle Blue - Advanced Salt Cleaner for Stubborn Stains',
         },
         {
-            icon: <FaBath className="text-5xl" />,
-            title: 'Bathroom Cleaning',
-            description: 'Complete bathroom deep cleaning service that includes toilet sanitization, tile cleaning, mirror polishing, and removal of hard water stains and mold using our specialized cleaners.',
-            features: [
-                'Complete sanitization',
-                'Hard water stain removal',
-                'Mold & mildew treatment',
-                'Mirror & fixture polishing',
-                'Fresh fragrance',
-            ],
-            color: 'from-cyan-400 to-teal-500',
-            bgColor: 'from-cyan-50 to-teal-50',
-            image: cleaningProducts,
-            productNote: 'Complete cleaning kit with YahYah Sparkle products & accessories',
-        },
-        {
             icon: <MdCleaningServices className="text-5xl" />,
             title: 'Deep Cleaning',
             description: 'Comprehensive deep cleaning service for your entire home using our full range of YahYah Sparkle cleaning solutions. We clean every corner, surface, and hard-to-reach area for a thorough transformation.',
@@ -78,6 +66,18 @@ const Services = () => {
             productNote: 'Our full range of YahYah Sparkle cleaning solutions',
         },
     ];
+
+    const [selectedProduct, setSelectedProduct] = React.useState(null);
+    const [isModalOpen, setIsModalOpen] = React.useState(false);
+
+    const openModal = (product) => {
+        setSelectedProduct(product);
+        setIsModalOpen(true);
+    };
+
+    const closeModal = () => {
+        setIsModalOpen(false);
+    };
 
     const process = [
         { step: '01', title: 'Book Online or Call', description: 'Schedule your cleaning service via call or our contact form' },
@@ -230,29 +230,29 @@ const Services = () => {
                         </div>
 
                         <div className="bg-gradient-to-br from-accent-100 to-cyan-100 rounded-3xl p-6 overflow-hidden">
-                            <div className="grid grid-cols-2 gap-4">
-                                <div className="relative">
-                                    <img
-                                        src={blueCleaner}
-                                        alt="YahYah Sparkle Blue Salt Cleaner"
-                                        className="w-full h-64 object-cover rounded-2xl shadow-lg"
-                                    />
-                                    <div className="absolute bottom-2 left-2 right-2 bg-blue-500/90 text-white text-xs py-2 px-3 rounded-lg text-center font-semibold">
-                                        Blue Salt Cleaner
+                            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                                {products.map((product, pIndex) => (
+                                    <div key={pIndex} className="relative group cursor-pointer" onClick={() => openModal(product)}>
+                                        <div className={`aspect-video bg-gradient-to-br ${product.bgColor} rounded-2xl overflow-hidden shadow-md mb-3`}>
+                                            <img
+                                                src={product.banner || product.image}
+                                                alt={product.name}
+                                                className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                                            />
+                                        </div>
+                                        <div className={`p-3 bg-white rounded-xl shadow-sm border border-gray-100 group-hover:border-accent-300 transition-colors`}>
+                                            <p className="font-bold text-gray-900 text-sm truncate">{product.name}</p>
+                                            <p className="text-accent-600 text-xs font-semibold">{product.price}</p>
+                                        </div>
+                                        <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity bg-black/10 rounded-2xl">
+                                            <span className="bg-white text-gray-900 px-3 py-1.5 rounded-full text-xs font-bold shadow-lg">
+                                                View Details
+                                            </span>
+                                        </div>
                                     </div>
-                                </div>
-                                <div className="relative">
-                                    <img
-                                        src={redCleaner}
-                                        alt="YahYah Sparkle Red Multi Cleaner"
-                                        className="w-full h-64 object-cover rounded-2xl shadow-lg"
-                                    />
-                                    <div className="absolute bottom-2 left-2 right-2 bg-red-500/90 text-white text-xs py-2 px-3 rounded-lg text-center font-semibold">
-                                        Red Multi Cleaner
-                                    </div>
-                                </div>
+                                ))}
                             </div>
-                            <p className="text-accent-700 font-bold text-lg text-center mt-4">Our Premium Cleaning Solutions</p>
+                            <p className="text-accent-700 font-bold text-lg text-center mt-6 uppercase tracking-wider">YahYah Sparkle Premium Solutions</p>
                         </div>
                     </div>
                 </div>
@@ -278,6 +278,12 @@ const Services = () => {
                     </div>
                 </div>
             </section>
+            {/* Product Details Modal */}
+            <ProductDetailsModal
+                isOpen={isModalOpen}
+                onClose={closeModal}
+                product={selectedProduct}
+            />
         </div>
     );
 };

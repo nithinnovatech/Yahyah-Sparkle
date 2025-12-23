@@ -10,58 +10,43 @@ import blueCleaner from '../assets/blue-cleaner.jpg';
 import comboPack from '../assets/combo-pack.png';
 import productBottles from '../assets/product-bottles.jpg';
 
+// Import product data and components
+import { products } from '../data/products';
+import ProductDetailsModal from '../components/ProductDetailsModal';
+
 const Home = () => {
     const services = [
         {
-            icon: <MdKitchen className="text-4xl" />,
-            title: 'Kitchen Tiles Cleaning',
-            description: 'Deep cleaning for kitchen tiles, removing grease, stains, and grime for a sparkling finish.',
-            color: 'from-orange-400 to-red-500',
+            icon: <FaBath className="text-4xl" />,
+            title: 'Bathroom Specialty Cleaning',
+            description: 'Deep cleaning for buckets, taps, marble, mirrors, and even water tanks.',
+            color: 'from-blue-400 to-indigo-500',
         },
         {
             icon: <FaHome className="text-4xl" />,
             title: 'Floor Cleaning',
-            description: 'Professional floor cleaning for all surfaces - marble, tiles, wood, and more.',
-            color: 'from-blue-400 to-indigo-500',
+            description: 'Professional cleaning for marble, tiles, and all types of floors.',
+            color: 'from-cyan-400 to-teal-500',
         },
         {
-            icon: <FaBath className="text-4xl" />,
-            title: 'Bathroom Cleaning',
-            description: 'Complete bathroom sanitization and deep cleaning for a hygienic space.',
-            color: 'from-cyan-400 to-teal-500',
+            icon: <MdCleaningServices className="text-4xl" />,
+            title: 'Full Home Deep Cleaning',
+            description: 'Comprehensive cleaning solutions for a sparkling home.',
+            color: 'from-purple-400 to-violet-500',
         },
     ];
 
-    const products = [
-        {
-            name: 'YahYah Sparkle Red',
-            subtitle: 'Advanced Multi Cleaner for Deep Clean',
-            price: '₹350',
-            unit: '1 Litre',
-            image: redCleaner,
-            color: 'from-red-500 to-orange-500',
-            bgColor: 'from-red-50 to-orange-50',
-        },
-        {
-            name: 'YahYah Sparkle Blue',
-            subtitle: 'Advanced Salt Cleaner for Stubborn Stains',
-            price: '₹250',
-            unit: '1 Litre',
-            image: blueCleaner,
-            color: 'from-blue-500 to-cyan-500',
-            bgColor: 'from-blue-50 to-cyan-50',
-        },
-        {
-            name: 'Combo Pack - Best Value!',
-            subtitle: 'Complete Cleaning Kit with Red & Blue Cleaners + Accessories',
-            price: '₹1500',
-            unit: '6 Litres',
-            image: comboPack,
-            color: 'from-purple-500 to-pink-500',
-            bgColor: 'from-purple-50 to-pink-50',
-            isBestValue: true,
-        },
-    ];
+    const [selectedProduct, setSelectedProduct] = React.useState(null);
+    const [isModalOpen, setIsModalOpen] = React.useState(false);
+
+    const openModal = (product) => {
+        setSelectedProduct(product);
+        setIsModalOpen(true);
+    };
+
+    const closeModal = () => {
+        setIsModalOpen(false);
+    };
 
     const whyChooseUs = [
         'Professional & Trained Staff',
@@ -174,7 +159,7 @@ const Home = () => {
                         </p>
                     </div>
 
-                    <div className="grid md:grid-cols-3 gap-8">
+                    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
                         {products.map((product, index) => (
                             <motion.div
                                 key={index}
@@ -184,9 +169,16 @@ const Home = () => {
                                 className="group"
                             >
                                 <div className={`bg-gradient-to-br ${product.bgColor} rounded-3xl p-6 h-full hover:shadow-2xl transition-all duration-300 relative`}>
+                                    {/* Bumper Offer Badge */}
+                                    {product.isBumperOffer && (
+                                        <div className="absolute -top-3 left-1/2 transform -translate-x-1/2 bg-gradient-to-r from-red-600 via-green-600 to-red-600 text-white px-4 py-1 rounded-full text-xs font-bold shadow-lg z-10 animate-bounce">
+                                            🎄 BUMPER OFFER 🎁
+                                        </div>
+                                    )}
+
                                     {/* Best Value Badge */}
-                                    {product.isBestValue && (
-                                        <div className="absolute -top-3 left-1/2 transform -translate-x-1/2 bg-gradient-to-r from-yellow-400 to-orange-500 text-white px-4 py-1 rounded-full text-sm font-bold shadow-lg z-10">
+                                    {product.isBestValue && !product.isBumperOffer && (
+                                        <div className="absolute -top-3 left-1/2 transform -translate-x-1/2 bg-gradient-to-r from-yellow-400 to-orange-500 text-white px-4 py-1 rounded-full text-xs font-bold shadow-lg z-10">
                                             🔥 Best Value!
                                         </div>
                                     )}
@@ -211,15 +203,24 @@ const Home = () => {
                                             <span className="text-white/80 text-sm ml-2">/ {product.unit}</span>
                                         </div>
 
-                                        {/* Order Button */}
-                                        <a
-                                            href={`https://wa.me/${whatsappNumber}?text=${encodeURIComponent(`Hi! I want to order ${product.name} (${product.price} / ${product.unit}). Please confirm availability.`)}`}
-                                            target="_blank"
-                                            rel="noopener noreferrer"
-                                            className={`inline-flex items-center justify-center w-full px-6 py-3 bg-gradient-to-r ${product.color} text-white font-bold rounded-full hover:shadow-lg transition-all duration-300 transform hover:scale-105`}
-                                        >
-                                            <FaShoppingCart className="mr-2" /> Order Now
-                                        </a>
+                                        {/* Buttons */}
+                                        <div className="space-y-3">
+                                            <button
+                                                onClick={() => openModal(product)}
+                                                className={`inline-flex items-center justify-center w-full px-6 py-3 border-2 border-current text-gray-700 font-bold rounded-full hover:bg-white/50 transition-all duration-300 transform hover:scale-105`}
+                                                style={{ color: product.color.includes('red') ? '#ef4444' : product.color.includes('blue') ? '#3b82f6' : product.color.includes('purple') ? '#a855f7' : '#16a34a' }}
+                                            >
+                                                View Details
+                                            </button>
+                                            <a
+                                                href={`https://wa.me/${whatsappNumber}?text=${encodeURIComponent(`Hi! I want to order ${product.name} (${product.price} / ${product.unit}). Please confirm availability.`)}`}
+                                                target="_blank"
+                                                rel="noopener noreferrer"
+                                                className={`inline-flex items-center justify-center w-full px-6 py-3 bg-gradient-to-r ${product.color} text-white font-bold rounded-full hover:shadow-lg transition-all duration-300 transform hover:scale-105`}
+                                            >
+                                                <FaShoppingCart className="mr-2" /> Order Now
+                                            </a>
+                                        </div>
                                     </div>
                                 </div>
                             </motion.div>
@@ -243,7 +244,7 @@ const Home = () => {
                         </p>
                     </div>
 
-                    <div className="grid md:grid-cols-3 gap-8">
+                    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
                         {services.map((service, index) => (
                             <motion.div
                                 key={index}
@@ -341,6 +342,12 @@ const Home = () => {
                     </div>
                 </div>
             </section>
+            {/* Product Details Modal */}
+            <ProductDetailsModal
+                isOpen={isModalOpen}
+                onClose={closeModal}
+                product={selectedProduct}
+            />
         </div>
     );
 };
