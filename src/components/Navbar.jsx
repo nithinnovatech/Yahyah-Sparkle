@@ -44,7 +44,7 @@ const Navbar = () => {
                         <img
                             src={logo}
                             alt="YahYah Sparkle"
-                            className="h-14 w-auto object-contain"
+                            className="h-24 md:h-14 w-auto object-contain"
                         />
                     </Link>
 

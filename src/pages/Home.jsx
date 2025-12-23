@@ -184,11 +184,11 @@ const Home = () => {
                                     )}
 
                                     {/* Product Image */}
-                                    <div className="relative mb-6 overflow-hidden rounded-2xl">
+                                    <div className="relative mb-6 overflow-hidden rounded-2xl bg-white/50 h-64 flex items-center justify-center">
                                         <img
                                             src={product.image}
                                             alt={product.name}
-                                            className="w-full h-64 object-cover group-hover:scale-105 transition-transform duration-300"
+                                            className="max-h-full max-w-full object-contain group-hover:scale-105 transition-transform duration-300"
                                         />
                                     </div>
 
